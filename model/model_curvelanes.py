@@ -65,10 +65,10 @@ class parsingNet(torch.nn.Module):
         out_row = self.cls_row(out[:, :10, :]).permute(0, 2, 1)
         out_col = self.cls_col(out[:, 10:, :]).permute(0, 2, 1)
 
-        pred_dict = {'loc_row': out_row[:,:self.dim1, :].view(-1,self.num_grid_row, self.num_cls_row, self.num_lane_on_row), 
-                'loc_col': out_col[:,:self.dim3, :].view(-1, self.num_grid_col, self.num_cls_col, self.num_lane_on_col),
-                'exist_row': out_row[:,self.dim1:self.dim1+self.dim2, :].view(-1, 2, self.num_cls_row, self.num_lane_on_row), 
-                'exist_col': out_col[:,self.dim3:self.dim3+self.dim4, :].view(-1, 2, self.num_cls_col, self.num_lane_on_col),
+        pred_dict = {'loc_row': out_row[:,:self.dim1, :].reshape(-1,self.num_grid_row, self.num_cls_row, self.num_lane_on_row), 
+                'loc_col': out_col[:,:self.dim3, :].reshape(-1, self.num_grid_col, self.num_cls_col, self.num_lane_on_col),
+                'exist_row': out_row[:,self.dim1:self.dim1+self.dim2, :].reshape(-1, 2, self.num_cls_row, self.num_lane_on_row), 
+                'exist_col': out_col[:,self.dim3:self.dim3+self.dim4, :].reshape(-1, 2, self.num_cls_col, self.num_lane_on_col),
                 'lane_token_row': lane_token[:, :10, :, :].sum(1), 'lane_token_col': lane_token[:, 10:, :, :].sum(1)}
         if self.use_aux:
             pred_dict['seg_out'] = seg_out

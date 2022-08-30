@@ -66,6 +66,7 @@ def get_args():
     parser.add_argument('--selected_lane', default = None, type = int, nargs='+')
     parser.add_argument('--cumsum', default = None, type = str2bool)
     parser.add_argument('--masked', default = None, type = str2bool)
+    parser.add_argument('--ros_topic', default = None, type = str)
     
     
     return parser
@@ -79,7 +80,8 @@ def merge_config():
     'weight_decay','momentum','scheduler','steps','gamma','warmup','warmup_iters',
     'use_aux','griding_num','backbone','sim_loss_w','shp_loss_w','note','log_path',
     'finetune','resume', 'test_model','test_work_dir', 'num_lanes', 'var_loss_power', 'num_row', 'num_col', 'train_width', 'train_height',
-    'num_cell_row', 'num_cell_col', 'mean_loss_w','fc_norm','soft_loss','cls_loss_col_w', 'cls_ext_col_w', 'mean_loss_col_w', 'eval_mode', 'eval_during_training', 'split_channel', 'match_method', 'selected_lane', 'cumsum', 'masked']
+    'num_cell_row', 'num_cell_col', 'mean_loss_w','fc_norm','soft_loss','cls_loss_col_w', 'cls_ext_col_w', 'mean_loss_col_w', 'eval_mode', 'eval_during_training', 
+    'split_channel', 'match_method', 'selected_lane', 'cumsum', 'masked', 'ros_topic']
     for item in items:
         if getattr(args, item) is not None:
             dist_print('merge ', item, ' config')

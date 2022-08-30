@@ -1,1 +1,1 @@
-bus.jpeg
+/camera_fl/image_raw_rgb
